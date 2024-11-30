@@ -10,3 +10,5 @@ export const routes: Routes = [
     {path : "upload" , component : UploadComponent},
     {path : " ", component :ListaComponent}
 ];
+
+

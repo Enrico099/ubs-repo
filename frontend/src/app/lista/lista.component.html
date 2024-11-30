@@ -1,1 +1,28 @@
-<p>lista works!</p>
+<div class="container">
+    <h2>Listagem de Registros</h2>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Buscar por nome ou documento" [(ngModel)]="filtro">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" (click)="onBuscar()">Buscar</button>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome Completo</th>
+          <th>Documento</th>
+          <!-- Adicione outros campos conforme necessário -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let registro of registros">
+          <td>{{ registro.id }}</td>
+          <td>{{ registro.nomeCompleto }}</td>
+          <td>{{ registro.documento }}</td>
+          <!-- Adicione outros campos conforme necessário -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
