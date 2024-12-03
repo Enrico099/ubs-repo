@@ -1,28 +1,66 @@
-<div class="container">
-    <h2>Listagem de Registros</h2>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Buscar por nome ou documento" [(ngModel)]="filtro">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="button" (click)="onBuscar()">Buscar</button>
-      </div>
+
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col-md-9">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Digite para pesquisar..."
+        [(ngModel)]="termoBusca"
+      >
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome Completo</th>
-          <th>Documento</th>
-          <!-- Adicione outros campos conforme necessário -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let registro of registros">
-          <td>{{ registro.id }}</td>
-          <td>{{ registro.nomeCompleto }}</td>
-          <td>{{ registro.documento }}</td>
-          <!-- Adicione outros campos conforme necessário -->
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-md-3 text-end">
+      <button
+        (click)="pesquisar();"
+        class="btn btn-success w-100">
+        <i class="bi bi-search"></i>
+        Pesquisar
+      </button>
+    </div>
   </div>
-  
+
+
+  <div
+    class="alert alert-warning mt-3"
+    *ngIf="mensagem && mensagem.length > 0">
+    {{ mensagem }}
+  </div>
+
+
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Resultados da Pesquisa</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of lista">
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.documento }}</td>
+            <td>
+              <!-- Botões de ação -->
+              <button class="btn btn-primary btn-sm me-2" (click)="editar(item)">
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="remover(item.codigo)">
+                <i class="bi bi-trash"></i> Remover
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="lista.length === 0">
+            <td colspan="4" class="text-center">Nenhum resultado encontrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

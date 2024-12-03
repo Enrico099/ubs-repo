@@ -1,32 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Para usar ngIf, ngFor
+import { FormsModule } from '@angular/forms'; // Para usar ngModel
+ 
 @Component({
   selector: 'app-lista',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.css']
+  styleUrls: ['./lista.component.css'] // Corrigido para styleUrls
 })
-export class ListaComponent implements OnInit {
-  registros: any[] = [];
-  filtro: string = '';
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.buscarRegistros();
+export class ListaComponent {
+  mensagem: string = ""; // Inicializando como string vazia
+  termoBusca: string = ""; // Variável para capturar o texto da busca
+  lista: Array<any> = [
+    
+  ]; // Exemplo de lista de dados
+ 
+  constructor() {}
+ 
+  // Função para pesquisar na lista
+  pesquisar(): void {
+    if (!this.termoBusca.trim()) {
+      this.mensagem = 'Digite um termo para a pesquisa.';
+      return;
+    }
+ 
+    // Filtrando a lista com base no termo de busca
+    const resultado = this.lista.filter(item =>
+      item.nome.toLowerCase().includes(this.termoBusca.toLowerCase()) ||
+      item.documento.includes(this.termoBusca)
+    );
+ 
+    if (resultado.length === 0) {
+      this.mensagem = 'Nenhum resultado encontrado.';
+    } else {
+      this.mensagem = '';
+      this.lista = resultado; // Atualiza a lista com os resultados filtrados
+    }
   }
-
-  buscarRegistros(): void {
-    this.http.get<any[]>(`/api/registros?filtro=${this.filtro}`).subscribe(data => {
-      this.registros = data;
-    });
+ 
+  // Função de editar (para ser implementada)
+  editar(item: any): void {
+    console.log('Editar:', item);
+    // Implementar lógica de edição, se necessário
   }
-
-  onBuscar(): void {
-    this.buscarRegistros();
+ 
+  // Função de remover
+  remover(codigo: number): void {
+    this.lista = this.lista.filter(item => item.codigo !== codigo);
+    this.mensagem = 'Item removido com sucesso!';
   }
 }
+ 
