@@ -23,6 +23,8 @@ export class CadastroComponent {
     this.service.salvar(this.obj).subscribe({
         next:(data)=>{this.mensagem="cliente inserido com sucesso!";},
         error:(msg)=>{this.mensagem="ocorreu erro tente mais tarde!";}
+
+        
      });
      this.limpar();
   }
