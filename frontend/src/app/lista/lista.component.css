@@ -52,7 +52,7 @@ table th, table td {
 }
 
 table th {
-  background-color: #f8f9fa; /* Cor de fundo para as colunas */
+  background-color:#ddd; /* Cor de fundo para as colunas */
   color: #495057;
   font-weight: 600;
 }
