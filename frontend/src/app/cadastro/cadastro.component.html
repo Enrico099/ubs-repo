@@ -1,22 +1,24 @@
 <div class="container">
   <h1>Cadastro de Paciente</h1>
   
-  <!-- Informações Pessoais -->
   <section>
     <h3>Informações Pessoais</h3>
+    
     <div class="mb-3">
       <label for="id">ID</label>
       <input type="text" id="id" [(ngModel)]="obj.id">
     </div>
 
     <div class="mb-3">
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" [(ngModel)]="obj.nome">
+      <label for="nome">Nome <span style="color: red;">*</span></label>
+      <input type="text" id="nome" [(ngModel)]="obj.nome" required>
+      <div *ngIf="!obj.nome && isFormSubmitted" class="error">O campo Nome é obrigatório.</div>
     </div>
 
     <div class="mb-3">
-      <label for="cpf">CPF</label>
-      <input type="text" id="cpf" [(ngModel)]="obj.cpf">
+      <label for="cpf">CPF <span style="color: red;">*</span></label>
+      <input type="text" id="cpf" [(ngModel)]="obj.cpf" required>
+      <div *ngIf="!obj.cpf && isFormSubmitted" class="error">O campo CPF é obrigatório.</div>
     </div>
 
     <div class="mb-3">
@@ -59,9 +61,9 @@
     </div>
   </section>
 
-  <!-- Escolaridade e Situação Familiar -->
   <section>
     <h3>Escolaridade e Situação Familiar</h3>
+    
     <div class="mb-3">
       <label for="frequentaEscola">Frequenta Escola</label>
       <select id="frequentaEscola" [(ngModel)]="obj.frequentaEscola">
@@ -91,9 +93,9 @@
     </div>
   </section>
 
-  <!-- Deficiência -->
   <section>
     <h3>Deficiência</h3>
+    
     <div class="mb-3">
       <label for="deficiencia">Deficiência</label>
       <input type="text" id="deficiencia" [(ngModel)]="obj.deficiencia">
@@ -105,7 +107,6 @@
     </div>
   </section>
 
-  <!-- Endereço -->
   <section>
     <h3>Endereço</h3>
     <div class="mb-3">
@@ -119,9 +120,9 @@
     </div>
   </section>
 
-  <!-- Contatos -->
   <section>
     <h3>Dados de Contato</h3>
+    
     <div class="mb-3">
       <label for="celular">Celular</label>
       <input type="text" id="celular" [(ngModel)]="obj.celular">
@@ -148,15 +149,14 @@
     </div>
   </section>
 
-  <!-- Identidade -->
   <section>
     <h3>Identidade</h3>
+    
     <div class="mb-3">
       <label for="identidade">Identidade</label>
       <input type="text" id="identidade" [(ngModel)]="obj.identidade">
     </div>
   </section>
 
-  <!-- Botão Salvar -->
   <button (click)="salvar();">Salvar</button>
 </div>
